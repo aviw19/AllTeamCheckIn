@@ -1,12 +1,22 @@
+import 'package:allteamcheckin/Screens/HomeScreen.dart';
 import 'package:allteamcheckin/Screens/WelcomeScreen.dart';
+import 'package:allteamcheckin/providers/FormProvider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => FormProvider()),
+        ],
+     child: MyApp(),   
+    
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignInPage(),
+      home: HomeScreen(),
     );
   }
 }
