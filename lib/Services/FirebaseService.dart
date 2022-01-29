@@ -30,7 +30,7 @@ class FirebaseService {
       if (authResult.additionalUserInfo != null &&
       authResult.additionalUserInfo!.isNewUser) {
         print("New User");
-        UserProfile userObj = UserProfile(email: user!.email.toString(), firebaseAuthToken: user.uid.toString(), hasCheckedIn: false, name: user.displayName.toString(), isAdmin: false);
+        UserProfile userObj = UserProfile(email: user!.email.toString(), firebaseAuthToken: user.uid.toString(), hasCheckedIn: false, name: user.displayName.toString(), isAdmin: false, questionList: []);
         print(userObj.toJson().toString());
         int start=user.email.toString().indexOf("@");
         String uniqueId=user.email.toString().substring(0,start);

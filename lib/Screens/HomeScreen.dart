@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 
 import 'package:allteamcheckin/DataModels/CheckInForm.dart';
@@ -25,21 +27,62 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Column(
+      body: SafeArea(
+        
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Consumer<FormProvider>(builder: (context, controller, child){
-            return controller.checkQuestions? Container(
-              child: ListView.builder(
-                itemCount: controller.getGroupResults.length,
-                itemBuilder: (context, index) {
-                            return Text(
-                               controller.getGroupResults[index],
-                            );
-                }),
-            ):Text("to yo");
-          },)
-        ])));
+          SizedBox(height: 100,),
+          Container(
+          height: MediaQuery.of(context).size.height*0.5,
+          child: 
+          FutureBuilder<List<String>> (
+            future: getQuestions(),
+            builder: (context,snapshot) {
+              if(snapshot.hasData){
+                List<String>? data=snapshot.data;
+                return ListView.builder(
+                  itemCount: data?.length,
+                  //scrollDirection: ,
+                  itemBuilder: (context,index){
+                    return Column(children: [Text(data![index]),
+                    TextField(textAlign: TextAlign.center,),
+                    ]);
+                  } );
+              }
+              else {
+                return CircularProgressIndicator();
+              }
+            },
+          )
+      ),
+      FlatButton(onPressed: () async { 
+        print("yop");
+        List<String> yo = ["w","2r","2"];
+        Map<String,dynamic> temp=new Map<String,dynamic>();
+        temp["questionList"]=yo;
+        await completeCheckIn(temp);
+
+
+       }, child: Text("Submit Response"),),
+      ])));
   }
+    Future<List<String>> getQuestions() async {
+     print("YO Yo");
+      late CheckInForm checkInForm;
+  
+    var response=await NetworkUtilities.getRequest("checkInForm.json");
+     print(response.toString());
+    if(response!=null) {
+      
+      checkInForm=CheckInForm.fromJson(response.data);
+
+    }
+      return checkInForm.questionList;
+    }
+  
+}
+Future<void> completeCheckIn(dynamic body) async {
+  var response = await NetworkUtilities.putRequest("User/f20180023.json", body);
 }
