@@ -1,5 +1,12 @@
+import 'dart:convert';
+
+import 'package:allteamcheckin/DataModels/User.dart';
+import 'package:allteamcheckin/Networking/NetworkUtilities.dart';
+
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 
 class FirebaseService {
@@ -16,10 +23,22 @@ class FirebaseService {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
+      Response response=await NetworkUtilities.getRequest("User.json");
+      print(response.toString());
       final UserCredential authResult=await _auth.signInWithCredential(credential);
+      final User? user=authResult.user;
       if (authResult.additionalUserInfo != null &&
       authResult.additionalUserInfo!.isNewUser) {
         print("New User");
+        UserProfile userObj = UserProfile(email: user!.email.toString(), firebaseAuthToken: user.uid.toString(), hasCheckedIn: false, name: user.displayName.toString(), isAdmin: false);
+        print(userObj.toJson().toString());
+        int start=user.email.toString().indexOf("@");
+        String uniqueId=user.email.toString().substring(0,start);
+        String endpoint="User/"+uniqueId+".json";
+        
+        var response = await NetworkUtilities.putRequest(endpoint.toString(),jsonEncode(userObj));
+        print(response.toString());
+        
         
       }
       else 
