@@ -1,3 +1,4 @@
+import 'package:allteamcheckin/Screens/HomeScreen.dart';
 import 'package:allteamcheckin/Screens/WelcomeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignInPage(),
+      home: HomeScreen(),
     );
   }
 }
