@@ -16,7 +16,14 @@ class FirebaseService {
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
-      await _auth.signInWithCredential(credential);
+      final UserCredential authResult=await _auth.signInWithCredential(credential);
+      if (authResult.additionalUserInfo != null &&
+      authResult.additionalUserInfo!.isNewUser) {
+        print("New User");
+        
+      }
+      else 
+        print("Old User");
     } on FirebaseAuthException catch (e) {
       print(e.message);
       throw e;
