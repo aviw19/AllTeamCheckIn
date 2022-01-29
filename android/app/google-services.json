@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "474504200609",
+    "project_id": "teamcheckin-eed20",
+    "storage_bucket": "teamcheckin-eed20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474504200609:android:4a7dfcfe6b10b6fd3a0be0",
+        "android_client_info": {
+          "package_name": "com.example.allteamcheckin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474504200609-nh7b5ostknlpa6goa6e45vepiv9v6a6a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.allteamcheckin",
+            "certificate_hash": "63bfeab2e2b1dd2726ddb8f77c89397b17786e4c"
+          }
+        },
+        {
+          "client_id": "474504200609-lh1d62q9e89l4d0luq88s0vmpv8tlipt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVnDjOtYHSl6_R4UsB2-JLjBqNHQEYSHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474504200609-lh1d62q9e89l4d0luq88s0vmpv8tlipt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
