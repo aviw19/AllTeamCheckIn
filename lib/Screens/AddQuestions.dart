@@ -57,6 +57,11 @@ class _AddQuestionsState extends State<AddQuestions> {
                 body["isLive"]=false;
                 await addQuestions(jsonEncode(body));
               }, child: Text("Add quetion")),
+               SizedBox(
+              height:MediaQuery.of(context).size.height*0.05),
+              ElevatedButton(onPressed: (){
+                
+              }, child: Text("Submit Form"))
             ],
           )
           ],
