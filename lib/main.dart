@@ -1,3 +1,5 @@
+import 'package:allteamcheckin/Screens/AddQuestions.dart';
+import 'package:allteamcheckin/Screens/AdminSelect.dart';
 import 'package:allteamcheckin/Screens/HomeScreen.dart';
 import 'package:allteamcheckin/Screens/WelcomeScreen.dart';
 import 'package:allteamcheckin/providers/FormProvider.dart';
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: AddQuestions(),
     );
   }
 }

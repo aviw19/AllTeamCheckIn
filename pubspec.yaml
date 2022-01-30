@@ -44,6 +44,8 @@ dependencies:
   dio: ^4.0.4
   dio_retry_fixed: ^0.1.15-beta-null-safety
   provider: ^6.0.2
+  fluttertoast: ^8.0.8
+
 
 
 
