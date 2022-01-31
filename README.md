@@ -2,6 +2,11 @@
 
 **Assignment**
 
+Tech Stack Used : 
+  Flutter for Mobile FrontEnd
+  Firebase for User Authentication and Login
+
+**App Functions**
 The app allows for user checkins of a specific domain email. 
 Domain handling is done within app for now hardcoding the specific domain. 
 The app is not fully functional, but individual tasks have tried to be incorportated. 
