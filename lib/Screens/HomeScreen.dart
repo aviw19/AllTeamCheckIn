@@ -4,6 +4,8 @@ import 'dart:convert';
 
 import 'package:allteamcheckin/DataModels/CheckInForm.dart';
 import 'package:allteamcheckin/Networking/NetworkUtilities.dart';
+import 'package:allteamcheckin/Screens/OtherUsers.dart';
+import 'package:allteamcheckin/Utils/MasterDetails.dart';
 import 'package:allteamcheckin/providers/FormProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,17 +17,18 @@ class HomeScreen extends StatefulWidget {
 }
 bool hasCheckedIn=false;
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> questions =["dd","f"];
+ 
 
 
   void initState() {
     super.initState();
   //fetchQuestionList();
-  Provider.of<FormProvider>(context, listen: false).getQuestions();
     } 
 
   @override
   Widget build(BuildContext context) {
+    List<String> questions=[];
+
     return Scaffold(
       body: SafeArea(
         
@@ -46,8 +49,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: data?.length,
                   //scrollDirection: ,
                   itemBuilder: (context,index){
+                    
+                    ///extFieldControllers.add(new TextEditingController());
                     return Column(children: [Text(data![index]),
-                    TextField(textAlign: TextAlign.center,),
+                    TextField(textAlign: TextAlign.center, onChanged: (text){
+
+                        questions[index]=text;
+                        print(questions[index]);
+                    },),
                     ]);
                   } );
               }
@@ -59,11 +68,17 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       FlatButton(onPressed: () async { 
         print("yop");
-        List<String> yo = ["w","2r","2"];
-        Map<String,dynamic> temp=new Map<String,dynamic>();
-        temp["questionList"]=yo;
-        await completeCheckIn(temp);
+        for(int i=0;i<questions.length;i++)
+            print(questions.toString()); 
 
+         List<String> ques =["dd","f"]; 
+        Map<String,dynamic> temp=new Map<String,dynamic>();
+        temp["questionList"]=ques;
+        await completeCheckIn(temp);
+         Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => OtherUsers()),(Route<dynamic> route) => false,
+  );
 
        }, child: Text("Submit Response"),),
       ])));
@@ -84,5 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
   
 }
 Future<void> completeCheckIn(dynamic body) async {
-  var response = await NetworkUtilities.putRequest("User/f20180023.json", body);
+  int start=MasterDetails.userId.indexOf("@");
+  String uniqueId=MasterDetails.userId.toString().substring(0,start);
+  String endpoint="User/"+uniqueId+".json";
+  var response = await NetworkUtilities.putRequest(endpoint, body);
 }

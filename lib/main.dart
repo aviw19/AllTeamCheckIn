@@ -3,14 +3,29 @@ import 'package:allteamcheckin/Screens/AdminSelect.dart';
 import 'package:allteamcheckin/Screens/HomeScreen.dart';
 import 'package:allteamcheckin/Screens/WelcomeScreen.dart';
 import 'package:allteamcheckin/providers/FormProvider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
+import 'Utils/MasterDetails.dart';
+bool isLoggedIn=false;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  bool isLoggedIn=false;
+  User user = await FirebaseAuth.instance.currentUser!;
+
+  print("app open status");
+  if (user != null) {
+    isLoggedIn = true;
+    MasterDetails.userId=user.email.toString();
+    print(MasterDetails.userId);
+    print("yo");
+  } else {
+    isLoggedIn = false;
+  }
   runApp(
     MultiProvider(
         providers: [
@@ -21,12 +36,15 @@ void main() async{
   ));
 }
 
+
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -41,7 +59,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignInPage(),
+      home: isLoggedIn?HomeScreen():SignInPage(),
     );
   }
 }
