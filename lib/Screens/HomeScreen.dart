@@ -8,7 +8,6 @@ import 'package:allteamcheckin/Screens/OtherUser.dart';
 
 import 'package:allteamcheckin/Screens/WelcomeScreen.dart';
 import 'package:allteamcheckin/Utils/MasterDetails.dart';
-import 'package:allteamcheckin/providers/FormProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
@@ -92,11 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
     var response=await NetworkUtilities.getRequest("checkInForm.json");
      print(response.toString());
     if(response!=null) {
-      
+      print("yo");
       checkInForm=CheckInForm.fromJson(response.data);
 
     }
+    print(checkInForm.questionList);
       return checkInForm.questionList;
+      
     }
   
 }

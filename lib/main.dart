@@ -32,13 +32,7 @@ void main() async{
   
   
   runApp(
-    MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => FormProvider()),
-        ],
-     child: MyApp(),   
-    
-  ));
+     MyApp(),);
 }
 
 

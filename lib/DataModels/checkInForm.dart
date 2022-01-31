@@ -1,5 +1,5 @@
 class CheckInForm {
-  late final bool isLive;
+  late final String isLive;
   late final List<String> questionList;
 
   CheckInForm({required this.isLive, required this.questionList});
