@@ -1,13 +1,9 @@
 import 'dart:convert';
-
 import 'package:allteamcheckin/DataModels/User.dart';
 import 'package:allteamcheckin/Networking/NetworkUtilities.dart';
-
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import 'package:firebase_core/firebase_core.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

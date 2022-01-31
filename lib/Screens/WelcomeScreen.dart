@@ -1,4 +1,5 @@
 
+import 'package:allteamcheckin/Screens/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Services/FirebaseService.dart';
@@ -20,7 +21,6 @@ class SignInPage extends StatelessWidget {
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Image.asset("assets/images/sign-in.png"),
           RichText(
               textAlign: TextAlign.center,
               text: TextSpan(children: <TextSpan>[
@@ -38,85 +38,13 @@ class SignInPage extends StatelessWidget {
             style: TextStyle(color: Constants.kDarkGreyColor),
           ),
           GoogleSignIn(),
-          buildRowDivider(size: size),
-          Padding(padding: EdgeInsets.only(bottom: size.height * 0.02)),
-          SizedBox(
-            width: size.width * 0.8,
-            child: TextField(
-                decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-                    enabledBorder: border,
-                    focusedBorder: border)),
-          ),
-          SizedBox(
-            height: size.height * 0.01,
-          ),
-          SizedBox(
-            width: size.width * 0.8,
-            child: TextField(
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-                enabledBorder: border,
-                focusedBorder: border,
-                suffixIcon: Padding(
-                  child: FaIcon(
-                    FontAwesomeIcons.eye,
-                    size: 15,
-                  ),
-                  padding: EdgeInsets.only(top: 15, left: 15),
-                ),
-              ),
-            ),
-          ),
+          
           Padding(padding: EdgeInsets.only(bottom: size.height * 0.05)),
-          SizedBox(
-            width: size.width * 0.8,
-            child: OutlinedButton(
-              onPressed: () async {},
-              child: Text(Constants.textSignIn),
-              style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Constants.kPrimaryColor),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Constants.kBlackColor),
-                  side: MaterialStateProperty.all<BorderSide>(BorderSide.none)),
-            ),
-          ),
-          RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: Constants.textAcc,
-                    style: TextStyle(
-                      color: Constants.kDarkGreyColor,
-                    )),
-                TextSpan(
-                    text: Constants.textSignUp,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Constants.kDarkBlueColor,
-                    )),
-              ])),
+          
+    
         ])));
   }
 
-  Widget buildRowDivider({required Size size}) {
-    return SizedBox(
-      width: size.width * 0.8,
-      child: Row(children: <Widget>[
-        Expanded(child: Divider(color: Constants.kDarkGreyColor)),
-        Padding(
-            padding: EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Text(
-              "Or",
-              style: TextStyle(color: Constants.kDarkGreyColor),
-            )),
-        Expanded(child: Divider(color: Constants.kDarkGreyColor)),
-      ]),
-    );
-  }
 }
 
 class GoogleSignIn extends StatefulWidget {
@@ -143,7 +71,10 @@ class _GoogleSignInState extends State<GoogleSignIn> {
           FirebaseService service = new FirebaseService();
           try {
            await service.signInwithGoogle();
-           Navigator.pushNamedAndRemoveUntil(context, Constants.homeNavigate, (route) => false);
+           Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(builder: (context) => HomeScreen()),(Route<dynamic> route) => false,
+  );
           } catch(e){
             if(e is FirebaseAuthException){
               showMessage(e.message!);
