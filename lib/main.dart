@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
+import 'PushNotification/PushNotificationService.dart';
 import 'Utils/MasterDetails.dart';
 bool isLoggedIn=false;
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,6 +29,8 @@ void main() async{
   } else {
     isLoggedIn = false;
   }
+  
+  
   runApp(
     MultiProvider(
         providers: [
@@ -45,7 +49,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
+       final firebaseMessaging = FCM();
+    firebaseMessaging.setNotifications();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
