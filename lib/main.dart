@@ -1,6 +1,7 @@
 import 'package:allteamcheckin/Screens/AddQuestions.dart';
 import 'package:allteamcheckin/Screens/AdminSelect.dart';
 import 'package:allteamcheckin/Screens/HomeScreen.dart';
+import 'package:allteamcheckin/Screens/OtherUser.dart';
 import 'package:allteamcheckin/Screens/WelcomeScreen.dart';
 import 'package:allteamcheckin/providers/FormProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
